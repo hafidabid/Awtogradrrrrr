@@ -1,0 +1,1 @@
+Masukkan x1: Masukkan y1: Masukkan x2: Masukkan y2: Masukkan x3: Masukkan y3: Jarak terpendeknya adalah 10.

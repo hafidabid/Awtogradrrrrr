@@ -1,0 +1,1 @@
+Masukkan nilai a: Masukkan nilai b: Masukkan nilai c: Masukkan nilai d: Setiap anak akan mendapat 19854 permen.
