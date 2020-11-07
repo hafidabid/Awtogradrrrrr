@@ -21,11 +21,11 @@ EX:
     -FOLDER_TP_01
 
 '''
-LOWEST_NIM =    16520080 #ISI DENGAN NIM TERENDAH DI KELAS
-HIGHEST_NIM =   16520080 #ISI DENGAN NIM TERTINGGI DI KELAS
-ADDITIONAL = [16520085,16520096] #GUNAKAN ADDITIONAL UNTUK NIM TAMBAHAN DILUAR RANGE NIM
-PRAKTIKUM = "01" #ISI DENGAN PRAKTIKUM KE-x DENGAN PENGISIAN "01" BUKAN 1 ATAU "02" BUKAN 2 ATAU "10" BUKAN 10
-FOLDER_SUBMISI_PRAKTIKUM = ["PRAKTIKUM_01_3.1B","TP_01_3.1B"] #FOLDER TEMPAT ANDA MENYIMPAN FILE PY PRAKTIKAN BAIK ITU TP DAN PRAKTIKUM
+LOWEST_NIM =    16520072 #ISI DENGAN NIM TERENDAH DI KELAS
+HIGHEST_NIM =   16520142 #ISI DENGAN NIM TERTINGGI DI KELAS
+ADDITIONAL = [] #GUNAKAN ADDITIONAL UNTUK NIM TAMBAHAN DILUAR RANGE NIM
+PRAKTIKUM = "02" #ISI DENGAN PRAKTIKUM KE-x DENGAN PENGISIAN "01" BUKAN 1 ATAU "02" BUKAN 2 ATAU "10" BUKAN 10
+FOLDER_SUBMISI_PRAKTIKUM = ["3.1_b_2_Pra-Praktikum"] #FOLDER TEMPAT ANDA MENYIMPAN FILE PY PRAKTIKAN BAIK ITU TP DAN PRAKTIKUM
 '''
 GENERAL SETTINGS
 
@@ -47,7 +47,7 @@ RESTRICTED_CODE UNTUK DAFTAR-DAFTAR KODE YANG DILARANG, EX: SUM, BREAK, DSB.
 AUTOSCORE_HEADER = True
 AUTOSCORE_KOMENTAR = True
 USE_PRESS_ENTER_TO_CONTINUE= False
-PREVIEW_AFTER_CHECKING = True
+PREVIEW_AFTER_CHECKING = False
 RESTRICTED_CODE = []
 
 '''
@@ -66,6 +66,9 @@ soal1 = {
     "skor_max_penguasaan_modul" : 20,   #SKOR MAKSIMAL PENGUASAAN MODUL
     "skor_max_kompilasi" : 20,      #SKOR APABILA PROGRAM TERCOMPILE DENGAN BAIK DAN BENAR
     "timeout" : 5,
+    "exact_mode": False, #MODE GRADING MUTLAK. APABILA BENAR 100% DENGAN TEST CASE MAKA NILAI FULL, JIKA SALAH MAKA 0
+    #HATI HATI DALAM MEMAKAI EXACT_MODE, KARENA APABILA JAWABAN BEDA TITIK SAJA MAKA AKAN LANGSUNG DI BERI NILAI 0.
+
     #CC DAPAT DITAMBAH DAN DIKURANGI. NAMUN MIN CC=1, DAN SEBISA MUNGKIN JANGAN KEBANYAKAN TC.
     #TC CUKUP 1-3 SAJA.
     "check_case" : {
@@ -104,6 +107,7 @@ soal1 = {
     "skor_max_penguasaan_modul" : 20,   #SKOR MAKSIMAL PENGUASAAN MODUL
     "skor_max_kompilasi" : 20,      #SKOR APABILA PROGRAM TERCOMPILE DENGAN BAIK DAN BENAR
     "timeout" : 5,
+    "exact_mode": False, #MODE GRADING MUTLAK. APABILA BENAR 100% DENGAN TEST CASE MAKA NILAI FULL, JIKA SALAH MAKA 0
     #CC DAPAT DITAMBAH DAN DIKURANGI. NAMUN MIN CC=1, DAN SEBISA MUNGKIN JANGAN KEBANYAKAN TC.
     #TC CUKUP 1-3 SAJA.
     "check_case" : {
@@ -174,7 +178,204 @@ soal2 = {
     },
 }
 
-LIST_SOAL = [soal1]
+tp21 = {
+    "type" : "H", #ISI DENGAN 'H' UNTUK PENDAHULUAN PRAKTIKUM DAN 'P' UNTUK PRAKTIKUM
+    "no_soal" : "01", # ISI DENGAN NOMOR SOAL DENGAN 01 BUKAN 1, 02 BUKAN 2
+    "check_header" : False,  #CEK HEADER? BILA TIDAK NILAI HEADER LANGSUNG 0
+    "skor_max_header" : 10,
+    "check_komentar" :False, #CEK KOMENTAR&INDENTASI ? BILA TIDAK NILAI LANGSUNG 0
+    "skor_max_komentar" :10,
+    "check_penguasaan_modul":False,      #CEK PENGUASAAN MODUL ? BILA TIDAK NILAI LANGSUNG 0
+    "skor_max_penguasaan_modul" : 20,   #SKOR MAKSIMAL PENGUASAAN MODUL
+    "skor_max_kompilasi" : 40,      #SKOR APABILA PROGRAM TERCOMPILE DENGAN BAIK DAN BENAR
+    "timeout" : 6,
+    "exact_mode": True, #MODE GRADING MUTLAK. APABILA BENAR 100% DENGAN TEST CASE MAKA NILAI FULL, JIKA SALAH MAKA 0
+    #CC DAPAT DITAMBAH DAN DIKURANGI. NAMUN MIN CC=1, DAN SEBISA MUNGKIN JANGAN KEBANYAKAN TC.
+    #TC CUKUP 1-3 SAJA.
+    "check_case" : {
+        "cc1":{
+            "stdin" : "testcases\\2tp\\1\\h01_cc1i.txt", #STDIN ADALAH INPUTAN PROGRAM
+            "stdout" : "testcases\\2tp\\1\\h01_cc1a.txt", #STDOUT ADALAH KELUARAN PROGRAM YANG BENAR
+        },
+        "cc2":{
+            "stdin" : "testcases\\2tp\\1\\h01_cc2i.txt", #STDIN ADALAH INPUTAN PROGRAM
+            "stdout" : "testcases\\2tp\\1\\h01_cc2a.txt", #STDOUT ADALAH KELUARAN PROGRAM YANG BENAR
+        }
+    },
+    #TEST CASE DAPAT DIPERBANYAK ATAU DI KURANGIN. DENGAN MIN TC=1.
+    "test_case" : {
+        "tc1" : {
+            "stdin" : "testcases\\2tp\\1\\h01_tc1i.txt", #STDIN ADALAH INPUTAN PROGRAM
+            "stdout" : "testcases\\2tp\\1\\h01_tc1a.txt", #STDOUT ADALAH KELUARAN PROGRAM YANG BENAR
+            "score" : 15                            #SCORE APABILA TC INI BENAR
+        },
+        "tc2"  :{
+            "stdin" : "testcases\\2tp\\1\\h01_tc2i.txt", #STDIN ADALAH INPUTAN PROGRAM
+            "stdout" : "testcases\\2tp\\1\\h01_tc2a.txt", #STDOUT ADALAH KELUARAN PROGRAM YANG BENAR
+            "score" : 15                            #SCORE APABILA TC INI BENAR
+        },
+        "tc3"  :{
+            "stdin" : "testcases\\2tp\\1\\h01_tc3i.txt", #STDIN ADALAH INPUTAN PROGRAM
+            "stdout" : "testcases\\2tp\\1\\h01_tc3a.txt", #STDOUT ADALAH KELUARAN PROGRAM YANG BENAR
+            "score" : 15                            #SCORE APABILA TC INI BENAR
+        },
+        "tc4": {
+            "stdin" : "testcases\\2tp\\1\\h01_tc4i.txt", #STDIN ADALAH INPUTAN PROGRAM
+            "stdout" : "testcases\\2tp\\1\\h01_tc4a.txt", #STDOUT ADALAH KELUARAN PROGRAM YANG BENAR
+            "score": 15                            #SCORE APABILA TC INI BENAR
+        }
+
+    },
+}
+
+tp22 = {
+    "type" : "H", #ISI DENGAN 'H' UNTUK PENDAHULUAN PRAKTIKUM DAN 'P' UNTUK PRAKTIKUM
+    "no_soal" : "02", # ISI DENGAN NOMOR SOAL DENGAN 01 BUKAN 1, 02 BUKAN 2
+    "check_header" : False,  #CEK HEADER? BILA TIDAK NILAI HEADER LANGSUNG 0
+    "skor_max_header" : 10,
+    "check_komentar" :False, #CEK KOMENTAR&INDENTASI ? BILA TIDAK NILAI LANGSUNG 0
+    "skor_max_komentar" :10,
+    "check_penguasaan_modul":False,      #CEK PENGUASAAN MODUL ? BILA TIDAK NILAI LANGSUNG 0
+    "skor_max_penguasaan_modul" : 20,   #SKOR MAKSIMAL PENGUASAAN MODUL
+    "skor_max_kompilasi" : 40,      #SKOR APABILA PROGRAM TERCOMPILE DENGAN BAIK DAN BENAR
+    "timeout" : 5,
+    "exact_mode": True, #MODE GRADING MUTLAK. APABILA BENAR 100% DENGAN TEST CASE MAKA NILAI FULL, JIKA SALAH MAKA 0
+    #CC DAPAT DITAMBAH DAN DIKURANGI. NAMUN MIN CC=1, DAN SEBISA MUNGKIN JANGAN KEBANYAKAN TC.
+    #TC CUKUP 1-3 SAJA.
+    "check_case" : {
+        "cc1":{
+            "stdin" : "testcases\\2tp\\2\\h01_cc1i.txt", #STDIN ADALAH INPUTAN PROGRAM
+            "stdout" : "testcases\\2tp\\2\\h01_cc1a.txt", #STDOUT ADALAH KELUARAN PROGRAM YANG BENAR
+        },
+        "cc2":{
+            "stdin" : "testcases\\2tp\\2\\h01_cc2i.txt", #STDIN ADALAH INPUTAN PROGRAM
+            "stdout" : "testcases\\2tp\\2\\h01_cc2a.txt", #STDOUT ADALAH KELUARAN PROGRAM YANG BENAR
+        }
+    },
+    #TEST CASE DAPAT DIPERBANYAK ATAU DI KURANGIN. DENGAN MIN TC=1.
+    "test_case" : {
+        "tc1" : {
+            "stdin"         : "testcases\\2tp\\2\\h01_tc1i.txt", #STDIN ADALAH INPUTAN PROGRAM
+            "stdout"        : "testcases\\2tp\\2\\h01_tc1a.txt", #STDOUT ADALAH KELUARAN PROGRAM YANG BENAR
+            "score"         : 15,                            #SCORE APABILA TC INI BENAR
+            "w_double_grade": False,
+            "double_grader" : {
+                "dgrader_app"   : "",
+                "dgrader_out"   : "",
+                "penalty"       : 0,
+            }
+        },
+        "tc2"  :{
+            "stdin" : "testcases\\2tp\\2\\h01_tc2i.txt", #STDIN ADALAH INPUTAN PROGRAM
+            "stdout" : "testcases\\2tp\\2\\h01_tc2a.txt", #STDOUT ADALAH KELUARAN PROGRAM YANG BENAR
+            "score" : 15,                            #SCORE APABILA TC INI BENAR
+            "w_double_grade": False,
+            "double_grader" : {
+                "dgrader_app"   : "",
+                "dgrader_out"   : "",
+                "penalty"       : 0,
+            }
+        },
+        "tc3"  :{
+            "stdin" : "testcases\\2tp\\2\\h01_tc3i.txt", #STDIN ADALAH INPUTAN PROGRAM
+            "stdout" : "testcases\\2tp\\2\\h01_tc3a.txt", #STDOUT ADALAH KELUARAN PROGRAM YANG BENAR
+            "score" : 15,                            #SCORE APABILA TC INI BENAR
+            "w_double_grade": False,
+            "double_grader" : {
+                "dgrader_app"   : "",
+                "dgrader_out"   : "",
+                "penalty"       : 0,
+            }
+        },
+        "tc4": {
+            "stdin" : "testcases\\2tp\\2\\h01_tc4i.txt", #STDIN ADALAH INPUTAN PROGRAM
+            "stdout" : "testcases\\2tp\\2\\h01_tc4a.txt", #STDOUT ADALAH KELUARAN PROGRAM YANG BENAR
+            "score": 15,                            #SCORE APABILA TC INI BENAR
+            "w_double_grade": False,
+            "double_grader" : {
+                "dgrader_app"   : "",
+                "dgrader_out"   : "",
+                "penalty"       : 0,
+            }
+        }
+
+    },
+}
+
+tp23 = {
+    "type" : "P", #ISI DENGAN 'H' UNTUK PENDAHULUAN PRAKTIKUM DAN 'P' UNTUK PRAKTIKUM
+    "no_soal" : "01", # ISI DENGAN NOMOR SOAL DENGAN 01 BUKAN 1, 02 BUKAN 2
+    "check_header" : True,  #CEK HEADER? BILA TIDAK NILAI HEADER LANGSUNG 0
+    "skor_max_header" : 10,
+    "check_komentar" :True, #CEK KOMENTAR&INDENTASI ? BILA TIDAK NILAI LANGSUNG 0
+    "skor_max_komentar" :10,
+    "check_penguasaan_modul":True,      #CEK PENGUASAAN MODUL ? BILA TIDAK NILAI LANGSUNG 0
+    "skor_max_penguasaan_modul" : 20,   #SKOR MAKSIMAL PENGUASAAN MODUL
+    "skor_max_kompilasi" : 20,      #SKOR APABILA PROGRAM TERCOMPILE DENGAN BAIK DAN BENAR
+    "timeout" : 5,
+    "exact_mode": False, #MODE GRADING MUTLAK. APABILA BENAR 100% DENGAN TEST CASE MAKA NILAI FULL, JIKA SALAH MAKA 0
+    #CC DAPAT DITAMBAH DAN DIKURANGI. NAMUN MIN CC=1, DAN SEBISA MUNGKIN JANGAN KEBANYAKAN TC.
+    #TC CUKUP 1-3 SAJA.
+    "check_case" : {
+        "cc1":{
+            "stdin" : "testcases\\2tp\\2\\h01_cc1i.txt", #STDIN ADALAH INPUTAN PROGRAM
+            "stdout" : "testcases\\2tp\\2\\h01_cc1a.txt", #STDOUT ADALAH KELUARAN PROGRAM YANG BENAR
+        },
+        "cc2":{
+            "stdin" : "testcases\\2tp\\2\\h01_cc2i.txt", #STDIN ADALAH INPUTAN PROGRAM
+            "stdout" : "testcases\\2tp\\2\\h01_cc2a.txt", #STDOUT ADALAH KELUARAN PROGRAM YANG BENAR
+        }
+    },
+    #TEST CASE DAPAT DIPERBANYAK ATAU DI KURANGIN. DENGAN MIN TC=1.
+    "test_case" : {
+        "tc1" : {
+            "stdin"         : "testcases\\2tp\\2\\h01_tc1i.txt", #STDIN ADALAH INPUTAN PROGRAM
+            "stdout"        : "testcases\\2tp\\2\\h01_tc1a.txt", #STDOUT ADALAH KELUARAN PROGRAM YANG BENAR
+            "score"         : 15,                            #SCORE APABILA TC INI BENAR
+            "w_double_grade": False,
+            "double_grader" : {
+                "dgrader_app"   : "",
+                "dgrader_out"   : "",
+                "penalty"       : 0,
+            }
+        },
+        "tc2"  :{
+            "stdin" : "testcases\\2tp\\2\\h01_tc2i.txt", #STDIN ADALAH INPUTAN PROGRAM
+            "stdout" : "testcases\\2tp\\2\\h01_tc2a.txt", #STDOUT ADALAH KELUARAN PROGRAM YANG BENAR
+            "score" : 15,                            #SCORE APABILA TC INI BENAR
+            "w_double_grade": False,
+            "double_grader" : {
+                "dgrader_app"   : "",
+                "dgrader_out"   : "",
+                "penalty"       : 0,
+            }
+        },
+        "tc3"  :{
+            "stdin" : "testcases\\2tp\\2\\h01_tc3i.txt", #STDIN ADALAH INPUTAN PROGRAM
+            "stdout" : "testcases\\2tp\\2\\h01_tc3a.txt", #STDOUT ADALAH KELUARAN PROGRAM YANG BENAR
+            "score" : 15,                            #SCORE APABILA TC INI BENAR
+            "w_double_grade": False,
+            "double_grader" : {
+                "dgrader_app"   : "",
+                "dgrader_out"   : "",
+                "penalty"       : 0,
+            }
+        },
+        "tc4": {
+            "stdin" : "testcases\\2tp\\2\\h01_tc4i.txt", #STDIN ADALAH INPUTAN PROGRAM
+            "stdout" : "testcases\\2tp\\2\\h01_tc4a.txt", #STDOUT ADALAH KELUARAN PROGRAM YANG BENAR
+            "score": 15,                            #SCORE APABILA TC INI BENAR
+            "w_double_grade": False,
+            "double_grader" : {
+                "dgrader_app"   : "",
+                "dgrader_out"   : "",
+                "penalty"       : 0,
+            }
+        }
+
+    },
+}
+LIST_SOAL = [tp22]
 
 
 

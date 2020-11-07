@@ -161,7 +161,7 @@ def checkKomentar(flname):
     return flag
 
 def korektor(nim,flname,soal):
-    LOOPTIME = 0.4
+    LOOPTIME = 0.1
     tulisatap(nim,flname,soal["no_soal"])
     print("\nFase 1. Pengoreksian Sourcecode ")
     printprogram(flname)
@@ -216,18 +216,22 @@ def korektor(nim,flname,soal):
             call(["python",flname],stdin=in_params,stdout=out_params,stderr=err_params,timeout=soal['timeout'])
             status_koreksi = checkAnswer(newansfile,correct_ans_link,newerrfile)
             nil_cc.append(int(status_koreksi))
-            if(pakaiEnter):
+            
+        except Exception as e:
+            print(e)
+            print("Nilai 0 telah diberikan")
+            nil_cc.append(0)
+
+    if(pakaiEnter):
                 print("tekan enter untuk lanjut")
                 x = input()
-            else:
+    else:
                 print()
                 for x in range(5):
                     print(". ",end="")
                     sleep(LOOPTIME)
-            clrscreen()
-        except Exception as e:
-            print(e)
-
+    clrscreen()
+    
     if float(sum(nil_cc))/float(len(nil_cc))>=1:
         nil_kompilasi = soal["skor_max_kompilasi"]
     else: nil_kompilasi = 0
@@ -261,9 +265,16 @@ def korektor(nim,flname,soal):
                         sleep(LOOPTIME)
 
             elif(status_koreksi==1):
-                txt = "Penilaian anda untuk testcase ini (0-"+str(temp["score"])+") = "
-                custnil = int(uinput(txt,0,temp["score"],True))
-                nil_tc.append(custnil)
+                if soal["exact_mode"]:
+                    nil_tc.append(0)
+                    print()
+                    for x in range(5):
+                        print(". ", end="")
+                        sleep(LOOPTIME)
+                else:
+                    txt = "Penilaian anda untuk testcase ini (0-"+str(temp["score"])+") = "
+                    custnil = int(uinput(txt,0,temp["score"],True))
+                    nil_tc.append(custnil)
             elif(status_koreksi==2):
                 nil_tc.append(int(temp["score"]))
                 if (pakaiEnter):
@@ -274,9 +285,21 @@ def korektor(nim,flname,soal):
                     for x in range(5):
                         print(". ", end="")
                         sleep(LOOPTIME)
-            clrscreen()
         except Exception as e:
             print(e)
+            print("nilai 0 telah diberikan")
+            nil_tc.append(0)
+            if (pakaiEnter):
+                    print("tekan enter untuk lanjut")
+                    x = input()
+            else:
+                print()
+                for x in range(5):
+                    print(". ", end="")
+                    sleep(LOOPTIME)
+        
+        clrscreen()
+
     nil_program = sum(nil_tc)
     print("pengoreksian soal "+soal["no_soal"]+" untuk nim "+str(nim)+" telah selesai")
     if PREVIEW_AFTER_CHECKING:
