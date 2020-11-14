@@ -1,0 +1,1 @@
+Masukkan bilangan pertama: Masukkan bilangan kedua: Masukkan bilangan ketiga: Masukkan bilangan keempat: FPB dari keempat bilangan tersebut adalah 312211

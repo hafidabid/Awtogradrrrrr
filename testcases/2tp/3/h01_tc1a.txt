@@ -1,0 +1,1 @@
+Masukkan X: 1 bukan bilangan prima

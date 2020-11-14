@@ -1,0 +1,1 @@
+Masukkan X: 992 bukan bilangan prima

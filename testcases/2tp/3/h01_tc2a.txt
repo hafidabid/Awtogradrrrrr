@@ -1,0 +1,1 @@
+Masukkan X: 97 adalah bilangan prima

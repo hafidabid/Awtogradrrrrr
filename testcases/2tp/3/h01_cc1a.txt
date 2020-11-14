@@ -1,0 +1,1 @@
+Masukkan X: 2 adalah bilangan prima

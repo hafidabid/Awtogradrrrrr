@@ -2,7 +2,7 @@ from filseparator import list_all_files as submission
 import pandas
 from settings import LOWEST_NIM,HIGHEST_NIM,LIST_SOAL,PRAKTIKUM,AUTOSCORE_HEADER,AUTOSCORE_KOMENTAR
 from settings import USE_PRESS_ENTER_TO_CONTINUE as pakaiEnter
-from settings import PREVIEW_AFTER_CHECKING,RESTRICTED_CODE,ADDITIONAL
+from settings import PREVIEW_AFTER_CHECKING,RESTRICTED_CODE,ADDITIONAL,TOLERATED_MODE
 import os
 from subprocess import call
 import sheetgenerator
@@ -74,6 +74,43 @@ def checkerr(errfile):
         for x in err: print(x)
         print(sheetgenerator.colors.reset)
         return True
+
+def checkLossAnswer(answer,key,errfile):
+    if(checkerr(errfile)):
+        return 0
+    else:
+        ans = ""
+        kunjaw = ""
+        with open(answer,'r') as jawaban:
+            for x in jawaban:
+                ans=ans+x
+                    
+            jawaban.close()
+        with open(key,'r') as kunci:
+            for x in kunci:
+                kunjaw = kunjaw+x
+                    
+            kunci.close()
+
+        ans = ans.lower()
+        kunjaw = kunjaw.lower()
+        ans = ''.join(ans.split())
+        kunjaw = ''.join(kunjaw.split())
+        ans.replace(".","")
+        kunjaw.replace(".","")
+        #print(ans)
+        #print(kunjaw)
+        #sleep(1)
+        if(ans==kunjaw):
+            print(sheetgenerator.colors.fg.green+"SELAMAT JAWABAN BENAR"+sheetgenerator.colors.reset)
+            return 2
+        else:
+            print(sheetgenerator.colors.fg.red+"JAWABAN SALAH !!!"+sheetgenerator.colors.reset)
+            print("JAWABAN PRAKTIKAN")
+            print(sheetgenerator.colors.fg.blue+ans+sheetgenerator.colors.reset)
+            print("\nJAWABAN BENAR")
+            print(sheetgenerator.colors.fg.green+kunjaw+sheetgenerator.colors.reset)
+            return 1
 
 def checkAnswer(answer,key,errfile):
     if(checkerr(errfile)):
@@ -214,7 +251,10 @@ def korektor(nim,flname,soal):
             err_params = open(newerrfile,'w')
             err_params.truncate()
             call(["python",flname],stdin=in_params,stdout=out_params,stderr=err_params,timeout=soal['timeout'])
-            status_koreksi = checkAnswer(newansfile,correct_ans_link,newerrfile)
+            if TOLERATED_MODE:
+                status_koreksi = checkLossAnswer(newansfile,correct_ans_link,newerrfile)
+            else:
+                status_koreksi = checkAnswer(newansfile,correct_ans_link,newerrfile)
             nil_cc.append(int(status_koreksi))
             
         except Exception as e:
@@ -251,7 +291,11 @@ def korektor(nim,flname,soal):
             err_params = open(newerrfile, 'w')
             err_params.truncate()
             call(["python", flname], stdin=in_params, stdout=out_params, stderr=err_params,timeout=soal['timeout'])
-            status_koreksi = checkAnswer(newansfile, correct_ans_link, newerrfile)
+            if TOLERATED_MODE:
+                status_koreksi = checkLossAnswer(newansfile, correct_ans_link, newerrfile)
+            else:
+                status_koreksi = checkAnswer(newansfile, correct_ans_link, newerrfile)
+            
             if(status_koreksi==0):
                 nil_tc.append(0)
                 print("Kompilasi error/ time limit exceeded. Nilai 0 telah diberikan untuk testcases ini")
